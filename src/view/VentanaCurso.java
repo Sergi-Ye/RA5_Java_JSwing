@@ -19,23 +19,18 @@ public class VentanaCurso extends javax.swing.JFrame {
     public static final DefaultListModel<String> modelo = new DefaultListModel<>();
     public static String archivo = Main.RUTA_DATOS + Main.SEPARATOR + VentanaPrincipal.seleccionado + Main.SEPARATOR + "alumnos.txt";
     
-
+    public static String curso = VentanaPrincipal.seleccionado;
+    public static String nombre;
+    public static String apellido;
+    public static int edad;
+    public static String dni;
+    public static Object JOptionPane;
     /**
      * Creates new form Curso
      */
     public VentanaCurso(){
         initComponents();
         //Carga Alumnos
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(archivo));
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                modelo.addElement(linea);
-            }
-        }catch(IOException e){
-            System.err.println("Error");
-            sc.nextLine();
-        }
         actualizar();
     }
 
@@ -54,13 +49,13 @@ public class VentanaCurso extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         sahur = new javax.swing.JButton();
         salir = new javax.swing.JButton();
-        nombre = new javax.swing.JScrollPane();
+        Jnombre = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        apellido = new javax.swing.JScrollPane();
+        Japellido = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
-        edad = new javax.swing.JScrollPane();
+        Jedad = new javax.swing.JScrollPane();
         jTextPane3 = new javax.swing.JTextPane();
-        dni = new javax.swing.JScrollPane();
+        Jdni = new javax.swing.JScrollPane();
         jTextPane4 = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         listaAlumnos = new javax.swing.JList<>();
@@ -99,13 +94,13 @@ public class VentanaCurso extends javax.swing.JFrame {
         salir.setText("SALIR");
         salir.addActionListener(this::salirActionPerformed);
 
-        nombre.setViewportView(jTextPane1);
+        Jnombre.setViewportView(jTextPane1);
 
-        apellido.setViewportView(jTextPane2);
+        Japellido.setViewportView(jTextPane2);
 
-        edad.setViewportView(jTextPane3);
+        Jedad.setViewportView(jTextPane3);
 
-        dni.setViewportView(jTextPane4);
+        Jdni.setViewportView(jTextPane4);
 
         listaAlumnos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = {};
@@ -149,19 +144,19 @@ public class VentanaCurso extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edad)
+                        .addComponent(Jedad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dni, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Jdni, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Jnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(apellido)))
+                        .addComponent(Japellido)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -176,14 +171,14 @@ public class VentanaCurso extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Jnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Japellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Jedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Jdni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -204,7 +199,9 @@ public class VentanaCurso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirActionPerformed
+        datos();
         ControladorAlumnos.anadir();
+        actualizar();
     }//GEN-LAST:event_anadirActionPerformed
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
@@ -255,28 +252,47 @@ public class VentanaCurso extends javax.swing.JFrame {
     }
     
     public static void actualizar(){
+        modelo.clear();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(archivo));
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                modelo.addElement(linea);
+            }
+            br.close();
+        }catch(IOException e){
+            System.err.println("Error");
+            sc.nextLine();
+        }
         listaAlumnos.setModel(modelo);
     }
+    public static void datos(){
+        nombre = jTextPane1.getText();
+        apellido = jTextPane2.getText();
+        edad = Integer.parseInt(jTextPane3.getText());
+        dni = jTextPane4.getText();
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JScrollPane Japellido;
+    private static javax.swing.JScrollPane Jdni;
+    private static javax.swing.JScrollPane Jedad;
+    private static javax.swing.JScrollPane Jnombre;
     private javax.swing.JButton anadir;
-    private javax.swing.JScrollPane apellido;
     private javax.swing.JButton buscar;
-    private javax.swing.JScrollPane dni;
-    private javax.swing.JScrollPane edad;
     private javax.swing.JButton eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
-    private javax.swing.JTextPane jTextPane4;
+    private static javax.swing.JTextPane jTextPane1;
+    private static javax.swing.JTextPane jTextPane2;
+    private static javax.swing.JTextPane jTextPane3;
+    private static javax.swing.JTextPane jTextPane4;
     private static javax.swing.JList<String> listaAlumnos;
     private javax.swing.JButton mostrar;
-    private javax.swing.JScrollPane nombre;
     private javax.swing.JButton sahur;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables

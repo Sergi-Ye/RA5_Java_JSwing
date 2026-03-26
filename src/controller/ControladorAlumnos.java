@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-import main.Main;
-import view.*;
+import view.VentanaCurso;
+import javax.swing.JOptionPane;
+import controller.ControladorAlumnos;
 import java.io.*;
 import java.util.Scanner;
+import main.Main;
+import model.GestorAlumnos;
 
 public class ControladorAlumnos {
 
@@ -20,9 +23,25 @@ public class ControladorAlumnos {
     }
     
     public static void anadir(){
-        String nombre = VentanaCurso.getFrames().toString();
-        
-
+        try{
+            String curso = Main.RUTA_DATOS + Main.SEPARATOR + VentanaCurso.curso + Main.SEPARATOR + "alumnos.txt";
+            String nombre = VentanaCurso.nombre;
+            String apellido = VentanaCurso.apellido;
+            int edad = VentanaCurso.edad;
+            String dni = VentanaCurso.dni;
+            
+            model.Alumno alumno = new model.Alumno(nombre, apellido, edad, dni);
+            String contenido = GestorAlumnos.leer(curso);
+            
+            if(!contenido.contains(dni)){
+                GestorAlumnos.añadir(curso, alumno);
+            }else{
+               JOptionPane.showMessageDialog(null, "Ya existe este dni");
+            }
+            
+        }catch(IOException e){
+            System.err.println(e);
+        }
     }
 
 /*    public static void agregarAlumno() throws IOException{

@@ -15,7 +15,7 @@ public class Alumno {
     private int edad;
     private String dni;
 
-    public Alumno(String nombre, String apellido, int edad, String curso, String dni) {
+    public Alumno(String nombre, String apellido, int edad, String dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
@@ -62,7 +62,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno{" + "nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", dni=" + dni + '}';
+        return nombre + ";" + apellido + ";" + edad + ";" + dni;
     }
     
 
