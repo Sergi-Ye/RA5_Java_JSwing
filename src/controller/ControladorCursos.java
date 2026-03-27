@@ -12,8 +12,7 @@ import view.VentanaPrincipal;
 
 public class ControladorCursos {
     static Scanner sc = new Scanner(System.in);
-    public static void main(String args[]) throws IOException{
-        
+    public static void main(String args[]){
     }
     
     public static void crear() {
@@ -35,7 +34,6 @@ public class ControladorCursos {
             System.err.println(e + "\n");
             sc.nextLine(); 
         }
-        
     }
     
     public static void eliminar(String seleccionado){

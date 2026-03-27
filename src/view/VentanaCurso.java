@@ -4,7 +4,6 @@
  */
 package view;
 import javax.swing.*;
-import javax.swing.DefaultListModel;
 import main.Main;
 import java.io.*;
 import java.util.Scanner;
@@ -25,7 +24,6 @@ public class VentanaCurso extends javax.swing.JFrame {
     public static String apellido;
     public static int edad;
     public static String dni;
-    public static Object JOptionPane;
     /**
      * Creates new form Curso
      */
@@ -189,13 +187,16 @@ public class VentanaCurso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anadirActionPerformed
-        datos();
+        if(!datos()){
+            return;
+        }
         ControladorAlumnos.anadir();
         actualizar();
     }//GEN-LAST:event_anadirActionPerformed
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-        // TODO add your handling code here:
+        indexSeleccionado = listaAlumnos.getSelectedIndex();
+        ControladorAlumnos.mostrar(indexSeleccionado);
     }//GEN-LAST:event_mostrarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -205,7 +206,7 @@ public class VentanaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
+        ControladorAlumnos.buscar();
     }//GEN-LAST:event_buscarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -255,11 +256,22 @@ public class VentanaCurso extends javax.swing.JFrame {
         }
         listaAlumnos.setModel(modelo);
     }
-    public static void datos(){
+    
+    public static boolean datos(){
+        if(jTextPane1.getText().isEmpty() || jTextPane2.getText().isEmpty() || jTextPane3.getText().isEmpty() || jTextPane4.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Hay campos vacios");
+            return false;
+        }
+        try{
+            edad = Integer.parseInt(jTextPane3.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "La edad tiene que ser un numero");
+            return false;
+        }
         nombre = jTextPane1.getText();
         apellido = jTextPane2.getText();
-        edad = Integer.parseInt(jTextPane3.getText());
         dni = jTextPane4.getText();
+        return true; 
     }
     
 

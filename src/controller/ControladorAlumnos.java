@@ -8,22 +8,20 @@ import javax.swing.JOptionPane;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import main.Main;
 import model.GestorAlumnos;
 
 public class ControladorAlumnos {
 
     public final static Scanner sc = new Scanner(System.in);
     static ArrayList<model.Alumno> alumnos;
-    static String curso = VentanaCurso.curso;
+    static String curso;
     
     public static void main(String args[]){
-        System.out.println("si");
-
     }
     
     public static void anadir(){
         try{
+            curso = VentanaCurso.curso;
             String nombre = VentanaCurso.nombre;
             String apellido = VentanaCurso.apellido;
             int edad = VentanaCurso.edad;
@@ -48,6 +46,7 @@ public class ControladorAlumnos {
     
     public static void eliminar(int indexSeleccionado){
         try{
+            curso = VentanaCurso.curso;
             alumnos = GestorAlumnos.leer(curso);
             alumnos.remove(indexSeleccionado);
             GestorAlumnos.eliminar(curso, alumnos);
@@ -56,6 +55,58 @@ public class ControladorAlumnos {
             sc.nextLine();
         }
     }
+    
+    public static void buscar(){
+        try{
+            curso = VentanaCurso.curso;
+            String dni = JOptionPane.showInputDialog("Introduce el dni a buscar");
+            
+            if(dni.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Campo vacio");
+                return;
+            }
+            alumnos = GestorAlumnos.leer(curso);
+            for(model.Alumno alumno: alumnos){
+                String[] datos = alumno.toString().split(";");
+                if(datos[3].equals(dni)){
+                    JOptionPane.showMessageDialog(
+                            null, 
+                            "Nombre: " + datos[0] + 
+                            "\nApellido: " + datos[1] + 
+                            "\nEdad: " + datos[2] + 
+                            "\nDNI: " + datos[3]
+                    );
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "No se ha encontrado un alumno con este DNI");
+            
+        }catch(IOException e){
+            System.err.println(e);
+            sc.nextLine();
+        }
+    }
+    
+    public static void mostrar(int indexSeleccionado){
+        try{
+            curso = VentanaCurso.curso;
+            alumnos = GestorAlumnos.leer(curso);
+            
+            String[] alumno = alumnos.get(indexSeleccionado).toString().split(";");
+            JOptionPane.showMessageDialog(
+                    null, 
+                    "Nombre: " + alumno[0] + 
+                    "\nApellido: " + alumno[1] + 
+                    "\nEdad: " + alumno[2] + 
+                    "\nDNI: " + alumno[3]
+            );
+        }catch(IOException e){
+            System.err.println(e);
+            sc.nextLine();
+        }
+    }
+    
+    
 
 /*    public static void agregarAlumno() throws IOException{
         

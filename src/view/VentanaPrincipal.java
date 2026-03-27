@@ -24,10 +24,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         //Carga cursos
-        modelo.clear();
-        for(String curso: Main.CARPETA_DATOS.list()){
-            modelo.addElement(curso);
-        }
         actualizar();
     }
     /**
@@ -149,7 +145,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         JDialog dialog = pane.createDialog("Imagen");
         dialog.setVisible(true);
-        
     }//GEN-LAST:event_sahurActionPerformed
 
     /**
@@ -178,6 +173,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     public final void actualizar(){
+        modelo.clear();
+        for(String curso: Main.CARPETA_DATOS.list()){
+            modelo.addElement(curso);
+        }
         listaCursos.setModel(modelo);
     }
 
