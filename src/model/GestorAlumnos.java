@@ -4,12 +4,10 @@
  */
 package model;
 
-import main.Main;
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import view.VentanaCurso;
-import view.VentanaPrincipal;
-
 /**
  *
  * @author Joan
@@ -25,16 +23,28 @@ public class GestorAlumnos {
         bw.close();
     }
     
-    public static String leer(String curso) throws IOException {
+    public static void eliminar(String curso, ArrayList<model.Alumno> alumnos) throws IOException{
+        BufferedWriter bw = new BufferedWriter(new FileWriter(curso, false));
+        for(model.Alumno alumno: alumnos){
+            bw.write(alumno.toString());
+            bw.write(salto);
+        }
+        bw.flush();
+        bw.close();
+    }
+    
+    public static ArrayList<model.Alumno> leer(String curso) throws IOException {
         
         BufferedReader br = new BufferedReader(new FileReader(curso));
-        ArrayList<model.Alumno> alumnos = new ArrayList<>;
+        ArrayList<model.Alumno> alumnos = new ArrayList<>();
         String linea;
         while((linea = br.readLine()) != null){
-            contenido += linea + "\n";
+            String[] dividido = linea.split(";");
+            model.Alumno alumno = new model.Alumno(dividido[0], dividido[1], Integer.parseInt(dividido[2]), dividido[3]);
+            alumnos.add(alumno);
         }
         br.close();
-        return contenido;
+        return alumnos;
         
     }
     

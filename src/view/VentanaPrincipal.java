@@ -135,8 +135,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vCurso = new VentanaCurso();
         vCurso.setVisible(true);        
         
-        Main.vPrincipal.setVisible(false);
-        //VentanaCurso.abrirCurso(seleccionado);
+        dispose();
     }//GEN-LAST:event_abrirActionPerformed
 
     private void sahurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sahurActionPerformed

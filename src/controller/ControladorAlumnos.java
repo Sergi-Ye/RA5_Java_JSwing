@@ -5,8 +5,8 @@
 package controller;
 import view.VentanaCurso;
 import javax.swing.JOptionPane;
-import controller.ControladorAlumnos;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import main.Main;
 import model.GestorAlumnos;
@@ -14,8 +14,8 @@ import model.GestorAlumnos;
 public class ControladorAlumnos {
 
     public final static Scanner sc = new Scanner(System.in);
-
-        
+    static ArrayList<model.Alumno> alumnos;
+    static String curso = VentanaCurso.curso;
     
     public static void main(String args[]){
         System.out.println("si");
@@ -24,23 +24,36 @@ public class ControladorAlumnos {
     
     public static void anadir(){
         try{
-            String curso = Main.RUTA_DATOS + Main.SEPARATOR + VentanaCurso.curso + Main.SEPARATOR + "alumnos.txt";
             String nombre = VentanaCurso.nombre;
             String apellido = VentanaCurso.apellido;
             int edad = VentanaCurso.edad;
             String dni = VentanaCurso.dni;
             
             model.Alumno alumno = new model.Alumno(nombre, apellido, edad, dni);
-            String contenido = GestorAlumnos.leer(curso);
+            alumnos = GestorAlumnos.leer(curso);
             
-            if(!contenido.contains(dni)){
-                GestorAlumnos.añadir(curso, alumno);
-            }else{
-               JOptionPane.showMessageDialog(null, "Ya existe este dni");
+            for(model.Alumno al: alumnos){
+                if(al.getDni().equals(dni)){
+                    JOptionPane.showMessageDialog(null, "Ya existe este dni");
+                    return;
+                } 
             }
+            GestorAlumnos.añadir(curso, alumno);
             
         }catch(IOException e){
             System.err.println(e);
+            sc.nextLine();
+        }
+    }
+    
+    public static void eliminar(int indexSeleccionado){
+        try{
+            alumnos = GestorAlumnos.leer(curso);
+            alumnos.remove(indexSeleccionado);
+            GestorAlumnos.eliminar(curso, alumnos);
+        }catch(IOException e){
+            System.err.println(e);
+            sc.nextLine();
         }
     }
 

@@ -4,6 +4,7 @@
  */
 package view;
 import javax.swing.*;
+import javax.swing.DefaultListModel;
 import main.Main;
 import java.io.*;
 import java.util.Scanner;
@@ -17,9 +18,9 @@ public class VentanaCurso extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaCurso.class.getName());
     static Scanner sc = new Scanner(System.in);
     public static final DefaultListModel<String> modelo = new DefaultListModel<>();
-    public static String archivo = Main.RUTA_DATOS + Main.SEPARATOR + VentanaPrincipal.seleccionado + Main.SEPARATOR + "alumnos.txt";
     
-    public static String curso = VentanaPrincipal.seleccionado;
+    public static String curso;
+    public static int indexSeleccionado;
     public static String nombre;
     public static String apellido;
     public static int edad;
@@ -30,6 +31,7 @@ public class VentanaCurso extends javax.swing.JFrame {
      */
     public VentanaCurso(){
         initComponents();
+        curso = Main.RUTA_DATOS + Main.SEPARATOR + VentanaPrincipal.seleccionado + Main.SEPARATOR + "alumnos.txt";
         //Carga Alumnos
         actualizar();
     }
@@ -47,7 +49,6 @@ public class VentanaCurso extends javax.swing.JFrame {
         mostrar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         buscar = new javax.swing.JButton();
-        sahur = new javax.swing.JButton();
         salir = new javax.swing.JButton();
         Jnombre = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
@@ -81,12 +82,6 @@ public class VentanaCurso extends javax.swing.JFrame {
         buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscar.setText("Buscar DNI");
         buscar.addActionListener(this::buscarActionPerformed);
-
-        sahur.setBackground(new java.awt.Color(255, 153, 153));
-        sahur.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        sahur.setForeground(new java.awt.Color(51, 51, 51));
-        sahur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/si.png"))); // NOI18N
-        sahur.addActionListener(this::sahurActionPerformed);
 
         salir.setBackground(new java.awt.Color(255, 153, 153));
         salir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -126,7 +121,7 @@ public class VentanaCurso extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane5)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -157,29 +152,24 @@ public class VentanaCurso extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Japellido)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Jnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Japellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Jedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Jdni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Jnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Japellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jedad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jdni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(anadir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,21 +199,19 @@ public class VentanaCurso extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:
+        indexSeleccionado = listaAlumnos.getSelectedIndex();
+        ControladorAlumnos.eliminar(indexSeleccionado);
+        actualizar();
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarActionPerformed
 
-    private void sahurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sahurActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sahurActionPerformed
-
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        VentanaPrincipal.vCurso.setVisible(false);
+        dispose();
+        Main.vPrincipal = new VentanaPrincipal();
         Main.vPrincipal.setVisible(true);
-        
     }//GEN-LAST:event_salirActionPerformed
 
     /**
@@ -254,10 +242,11 @@ public class VentanaCurso extends javax.swing.JFrame {
     public static void actualizar(){
         modelo.clear();
         try{
-            BufferedReader br = new BufferedReader(new FileReader(archivo));
+            BufferedReader br = new BufferedReader(new FileReader(curso));
             String linea;
             while ((linea = br.readLine()) != null) {
-                modelo.addElement(linea);
+                String[] datos =linea.split(";");
+                modelo.addElement(datos[0] + " " + datos[1] + " (" + datos[3] + ")");
             }
             br.close();
         }catch(IOException e){
@@ -293,7 +282,6 @@ public class VentanaCurso extends javax.swing.JFrame {
     private static javax.swing.JTextPane jTextPane4;
     private static javax.swing.JList<String> listaAlumnos;
     private javax.swing.JButton mostrar;
-    private javax.swing.JButton sahur;
     private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }
