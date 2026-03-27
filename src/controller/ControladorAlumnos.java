@@ -45,6 +45,7 @@ public class ControladorAlumnos {
     }
     
     public static void eliminar(int indexSeleccionado){
+        if(indexSeleccionado < 0){return;}
         try{
             curso = VentanaCurso.curso;
             alumnos = GestorAlumnos.leer(curso);
@@ -88,6 +89,7 @@ public class ControladorAlumnos {
     }
     
     public static void mostrar(int indexSeleccionado){
+        if(indexSeleccionado < 0){return;}
         try{
             curso = VentanaCurso.curso;
             alumnos = GestorAlumnos.leer(curso);

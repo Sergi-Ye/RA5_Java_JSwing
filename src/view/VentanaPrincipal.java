@@ -35,18 +35,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        numAlumnos = new javax.swing.JLabel();
+        Texto = new javax.swing.JLabel();
         sahur = new javax.swing.JButton();
         crear = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         abrir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaCursos = new javax.swing.JList<>();
+        numAlumnos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        numAlumnos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        numAlumnos.setText("Numero de alumnos: 0");
+        Texto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Texto.setText("Numero de alumnos: ");
 
         sahur.setBackground(new java.awt.Color(255, 153, 153));
         sahur.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -70,6 +71,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listaCursos);
 
+        numAlumnos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        numAlumnos.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,8 +87,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(numAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Texto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -98,7 +105,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(numAlumnos)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Texto)
+                            .addComponent(numAlumnos))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -127,6 +136,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
+        if(listaCursos.getSelectedValue() == null){return;}
         seleccionado = listaCursos.getSelectedValue();
         vCurso = new VentanaCurso();
         vCurso.setVisible(true);        
@@ -177,10 +187,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for(String curso: Main.CARPETA_DATOS.list()){
             modelo.addElement(curso);
         }
+        numAlumnos.setText(ControladorCursos.contarAlumnos());
         listaCursos.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Texto;
     private javax.swing.JButton abrir;
     private javax.swing.JButton crear;
     private javax.swing.JButton eliminar;

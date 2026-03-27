@@ -4,9 +4,11 @@
  */
 package controller;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import main.Main;
+import model.GestorAlumnos;
 import model.GestorCursos;
 import view.VentanaPrincipal;
 
@@ -17,8 +19,9 @@ public class ControladorCursos {
     
     public static void crear() {
         try{
-            String nombreCurso = JOptionPane.showInputDialog("Introduce el nombre del curso");
-
+            String a = JOptionPane.showInputDialog("Introduce el nombre del curso");
+            String nombreCurso = a.toLowerCase();
+            
             if (!nombreCurso.isEmpty()) {
                 if(!VentanaPrincipal.modelo.contains(nombreCurso)){
                     VentanaPrincipal.modelo.addElement(nombreCurso);
@@ -59,7 +62,20 @@ public class ControladorCursos {
         }*/
     }
     
-    
+    public static String contarAlumnos(){
+        int numAlumnos = 0; 
+        try{
+            for(String curso: Main.CARPETA_DATOS.list()){
+                String ruta = Main.RUTA_DATOS + Main.SEPARATOR + curso + Main.SEPARATOR + "alumnos.txt";
+                ArrayList<model.Alumno> alumnos = GestorAlumnos.leer(ruta);
+                numAlumnos += alumnos.size();
+            }   
+        }catch(IOException e){
+            System.err.println(e + "\n");
+            sc.nextLine();
+        }
+        return String.valueOf(numAlumnos);
+    }
     
  }
     
