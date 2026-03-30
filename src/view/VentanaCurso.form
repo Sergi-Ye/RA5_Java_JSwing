@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="jScrollPane5" max="32767" attributes="0"/>
@@ -62,6 +62,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Japellido" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="editar" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
@@ -86,7 +87,7 @@
                   <Component id="jLabel4" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="Jdni" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="anadir" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="mostrar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -96,8 +97,10 @@
                   <Component id="buscar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="eliminar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="editar" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jScrollPane5" pref="162" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="salir" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -278,6 +281,17 @@
         </Property>
         <Property name="text" type="java.lang.String" value="DNI:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="editar">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Editar Alumno"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

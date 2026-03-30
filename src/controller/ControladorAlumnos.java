@@ -108,124 +108,65 @@ public class ControladorAlumnos {
         }
     }
     
-    
-
-/*    public static void agregarAlumno() throws IOException{
-        
-        FileWriter fw = new FileWriter(registro, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        
-        try {
-            System.out.println("Introduzca el nombre:");
-            String nombre = sc.nextLine();
-            System.out.println("Introduzca el apellido:");
-            String apellido = sc.nextLine();
-            System.out.println("Introduzca la edad:");
-            int edad = sc.nextInt(); 
-            sc.nextLine();
-            System.out.println("Introduzca el curso:");
-            String curso = sc.nextLine();
-            System.out.println("Introduzca el dni:");
-            String dni = sc.nextLine();
-        
-            Alumno alumno = new Alumno(nombre, apellido, edad, curso, dni);
-        
-            bw.write(nombre + ", " + apellido + ", " + edad + ", " + curso + ", " + dni);
-            bw.write(salto);
-            bw.flush();
-            bw.close();
-            
-        }catch(Exception e) {
-            System.err.println(e + "\n");
-            sc.nextLine(); 
-        }
-
-}
-    public static void mostrarAlumnos() throws IOException{
-        FileReader fr = new FileReader(registro);
-        BufferedReader br = new BufferedReader(fr);
-        
+    public static void editar(int indexSeleccionado){
+        if(indexSeleccionado < 0){return;}
         try{
-            String linea;
+            curso = VentanaCurso.curso;
+            alumnos = GestorAlumnos.leer(curso);
+
+            model.Alumno alumno = alumnos.get(indexSeleccionado);
+
+            String nombreNuevo = JOptionPane.showInputDialog("Nuevo nombre:", alumno.getNombre());
+            if(nombreNuevo.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Campo vacio");
+                return;
+            }
+            String apellidoNuevo = JOptionPane.showInputDialog("Nuevo apellido:", alumno.getApellido());
+            if(apellidoNuevo.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Campo vacio");
+                return;
+            }
+            String edadTexto = JOptionPane.showInputDialog("Nueva edad:", alumno.getEdad());
+            if(edadTexto.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Campo vacia");
+                return;
+            }
             
-            while((linea = br.readLine())!= null){
-                System.out.println(linea);
+            int edadNueva;
+            try{
+                edadNueva = Integer.parseInt(edadTexto);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "La edad tiene que ser un numero");
+                return;
             }
-            br.close();
-        }
-        catch(IOException e) {
-            System.err.println(e + "\n");
-            sc.nextLine();
-        }
-    }
-    
-   public static void eliminarAlumno() {
-    try {
-        String linea;
-        String temporal = "";
-        boolean encontrado = false;
-        
-        System.out.println("Lista de alumnos:");
-        BufferedReader br = new BufferedReader(new FileReader(registro));
-        while((linea = br.readLine())!= null){
-                System.out.println(linea);
+            
+            String dniNuevo = JOptionPane.showInputDialog("Nuevo DNI:", alumno.getDni());
+            if(dniNuevo.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Campo vacio");
+                return;
             }
-        br.close();
 
-        System.out.println("Escriba el DNI del alumno a eliminar:");
-        String dni = sc.nextLine();
-
-        br = new BufferedReader(new FileReader(registro));
-        while ((linea = br.readLine()) != null) {
-            if (!linea.contains(dni)) {
-                temporal += linea + Main.SALTO;
-            } else {
-                encontrado = true;
-            }
-        }
-        br.close();
-        
-        if (encontrado) {
-            BufferedWriter bw = new BufferedWriter (new FileWriter(registro));
-            bw.write(temporal);
-            bw.flush();
-            bw.close();
-            System.out.println("Alumno eliminado correctamente");
-        } else {
-            System.out.println("No se ha econtrado este DNI");
-        }
-
-    }catch(IOException e){
-        System.err.println(e + "\n");
-        sc.nextLine();
-    }
-}
-   
-    public static void buscarDNI(){
-        try{     
-            String linea;
-            boolean encontrado = false;
-            System.out.println("Escriba el DNI del alumno::");
-            String dni = sc.nextLine();
-
-            BufferedReader br = new BufferedReader(new FileReader(registro));
-            while((linea = br.readLine())!= null){
-                    if(linea.contains(dni)){
-                        System.out.println(linea);
-                        encontrado = true;
-                    }
+            for(int i = 0; i < alumnos.size(); i++){
+                if(i != indexSeleccionado && alumnos.get(i).getDni().equals(dniNuevo)){
+                    JOptionPane.showMessageDialog(null, "Ya existe este dni");
+                    return;
                 }
-            br.close();
-            
-            if(!encontrado){
-                System.out.println("No se ha encontrado este DNI");
             }
+
+            alumno.setNombre(nombreNuevo);
+            alumno.setApellido(apellidoNuevo);
+            alumno.setEdad(edadNueva);
+            alumno.setDni(dniNuevo);
+
+            GestorAlumnos.eliminar(curso, alumnos);
+
+            JOptionPane.showMessageDialog(null, "Alumno editado correctamente");
+
         }catch(IOException e){
-            System.err.println(e + "\n");
+            System.err.println(e);
             sc.nextLine();
         }
     }
-*/
     
 }
 
