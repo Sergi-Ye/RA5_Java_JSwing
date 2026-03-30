@@ -49,10 +49,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Texto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Texto.setText("Numero de alumnos: ");
 
-        sahur.setBackground(new java.awt.Color(255, 153, 153));
+        sahur.setBackground(new java.awt.Color(51, 153, 255));
         sahur.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         sahur.setForeground(new java.awt.Color(51, 51, 51));
-        sahur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/si.png"))); // NOI18N
+        sahur.setText("?");
         sahur.addActionListener(this::sahurActionPerformed);
 
         crear.setText("Crear Curso");
@@ -78,8 +78,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(crear, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -92,30 +92,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(Texto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(numAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Texto)
-                            .addComponent(numAlumnos))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Texto)
+                    .addComponent(numAlumnos)
+                    .addComponent(sahur, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,7 +141,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_abrirActionPerformed
 
     private void sahurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sahurActionPerformed
-        ImageIcon imagen = new ImageIcon(getClass().getResource("Akashdeep Singh Kaur.png"));
+        ImageIcon imagen = new ImageIcon(getClass().getResource("Icono.png"));
         JOptionPane pane = new JOptionPane(
                 "Hola soy Akashdeep\nAquí tienes los valores seleccionados:\n     · Valor:"
                 + listaCursos.getSelectedValue() + "\n     · Indice: " + (int)(listaCursos.getSelectedIndex()+1),
