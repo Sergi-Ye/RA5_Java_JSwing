@@ -1,4 +1,3 @@
 Sergi;Ye;19;123
 Akash;Deep;19;321
-Eric;Dick;18;Tontito
-Hola;hola;18;111
+Eric;Huang;18;X111
