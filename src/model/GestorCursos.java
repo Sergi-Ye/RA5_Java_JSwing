@@ -7,10 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import main.Main;
-/**
- *
- * @author Joan
- */
+
+
 public class GestorCursos {
     
     static Scanner sc = new Scanner(System.in);

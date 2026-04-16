@@ -8,10 +8,8 @@ import main.Main;
 import java.io.*;
 import java.util.Scanner;
 import controller.ControladorAlumnos;
-/**
- *
- * @author Joan
- */
+
+
 public class VentanaCurso extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaCurso.class.getName());

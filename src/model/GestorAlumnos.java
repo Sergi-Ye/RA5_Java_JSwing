@@ -8,10 +8,8 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import view.VentanaCurso;
-/**
- *
- * @author Joan
- */
+
+
 public class GestorAlumnos {
     static String salto = System.getProperty("line.separator");
     
